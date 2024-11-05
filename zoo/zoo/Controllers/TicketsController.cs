@@ -13,30 +13,33 @@ namespace zoo.Controllers
         TicketsServicies ticketsServicies = new TicketsServicies();
         // GET: api/<TicketsController>
         [HttpGet]
-        public List<Ticket> Get()
+        public ActionResult<List<Ticket>> Get()
         {
             return ticketsServicies.Get();
         }
 
         // GET api/<TicketsController>/5
         [HttpGet("{id}")]
-        public Ticket Get(int id)
+        public ActionResult<Ticket> Get(int id)
         {
-            return ticketsServicies.GetById(id);
+            Ticket ticket = ticketsServicies.GetById(id);
+            if (ticket == null)
+                return NotFound();
+            return ticket;
         }
 
         // POST api/<TicketsController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Ticket ticket)
         {
-            return ticketsServicies.Post(ticket);
+            return ticketsServicies.Add(ticket);
         }
 
         // PUT api/<TicketsController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Ticket ticket)
         {
-            return ticketsServicies.Put(id, ticket);
+            return ticketsServicies.Update(id, ticket);
         }
 
         // DELETE api/<TicketsController>/5

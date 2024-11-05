@@ -13,30 +13,33 @@ namespace zoo.Controllers
         AnimalsServicies animalsServicies=new AnimalsServicies();
         // GET: api/<AnimalsController>
         [HttpGet]
-        public List<Animal> Get()
+        public ActionResult< List<Animal>> Get()
         {
             return animalsServicies.Get();
         }
 
         // GET api/<AnimalsController>/5
         [HttpGet("{id}")]
-        public Animal Get(int id)
+        public ActionResult<Animal> Get(int id)
         {
-            return animalsServicies.GetById(id);
+            Animal animal = animalsServicies.GetById(id);
+            if (animal == null)
+                return NotFound();
+            return animal;
         }
 
         // POST api/<AnimalsController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Animal animal)
         {
-            return animalsServicies.Post(animal);
+            return animalsServicies.Add(animal);
         }
 
         // PUT api/<AnimalsController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Animal animal)
         {
-            return animalsServicies.Put(id, animal);
+            return animalsServicies.Update(id, animal);
         }
 
         // DELETE api/<AnimalsController>/5

@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using zoo.DTO;
 using zoo.Entities;
 
 namespace zoo.Servicies
 {
     public class AnimalsServicies
     {
-        static List<Animal> dataAnimals = new List<Animal>();
+        static List<Animal> dataAnimals = DataManager.dataManager.dataAnimals;
         //private static int count = 0;
         public List<Animal> Get()
         {
@@ -15,24 +16,22 @@ namespace zoo.Servicies
         {
             return dataAnimals.FirstOrDefault(x => x.Id == id);
         }
-        public ActionResult<bool> Post(Animal a) 
+        public bool Add(Animal a) 
         { 
-            dataAnimals.Add(new Animal(a));
+            dataAnimals.Add(new Animal(a));///תקינות
             return true;
         }
-        public ActionResult<bool> Put(int id,Animal a)
+        public bool Update(int id,Animal a)
         {
-            for (int i = 0; i < dataAnimals.Count; i++)
+            int index = dataAnimals.FindIndex(x => x.Id == id);
+            if (index!=-1)
             {
-                if (id == dataAnimals[i].Id)
-                {
-                    dataAnimals[i] = new Animal(id,a);
-                    return true;
-                }
+                dataAnimals[index] = new Animal(id, a);
+                return true;
             }
             return false;
         }
-        public ActionResult<bool> Delete(int id)
+        public bool Delete(int id)
         {
             return dataAnimals.Remove(dataAnimals.FirstOrDefault(x => x.Id == id));
 

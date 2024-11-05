@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using zoo.DTO;
 using zoo.Entities;
 
 namespace zoo.Servicies
 {
     public class TicketsServicies
     {
-        static List<Ticket> dataTickets = new List<Ticket>();
+        static List<Ticket> dataTickets = DataManager.dataManager.dataTickets;
         //private static int count = 0;
         public List<Ticket> Get()
         {
@@ -15,24 +16,22 @@ namespace zoo.Servicies
         {
             return dataTickets.FirstOrDefault(x => x.Id == id);
         }
-        public ActionResult<bool> Post(Ticket t)
+        public bool Add(Ticket t)
         {
-            dataTickets.Add(new Ticket(t));
+            dataTickets.Add(new Ticket(t));/////
             return true;
         }
-        public ActionResult<bool> Put(int id, Ticket t)
+        public bool Update(int id, Ticket t)
         {
-            for (int i = 0; i < dataTickets.Count; i++)
+            int index = dataTickets.FindIndex(x => x.Id == id);
+            if (index != -1)
             {
-                if (id == dataTickets[i].Id)
-                {
-                    dataTickets[i] = new Ticket(id, t);
-                    return true;
-                }
+                dataTickets[index] = new Ticket(id, t);
+                return true;
             }
             return false;
         }
-        public ActionResult<bool> Delete(int id)
+        public bool Delete(int id)
         {
             return dataTickets.Remove(dataTickets.FirstOrDefault(x => x.Id == id));
 

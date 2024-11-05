@@ -13,30 +13,33 @@ namespace zoo.Controllers
         ShowsServicies showsServicies = new ShowsServicies();
         // GET: api/<ShowsController>
         [HttpGet]
-        public List<Show> Get()
+        public ActionResult<List<Show>> Get()
         {
             return showsServicies.Get();
         }
 
         // GET api/<ShowsController>/5
         [HttpGet("{id}")]
-        public Show Get(int id)
+        public ActionResult<Show> Get(int id)
         {
-            return showsServicies.GetById(id);
+            Show show = showsServicies.GetById(id);
+            if (show == null)
+                return NotFound();
+            return show;
         }
 
         // POST api/<ShowsController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Show show)
         {
-            return showsServicies.Post(show);
+            return showsServicies.Add(show);
         }
 
         // PUT api/<ShowsController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Show show)
         {
-            return showsServicies.Put(id, show);
+            return showsServicies.update(id, show);
         }
 
         // DELETE api/<ShowsController>/5

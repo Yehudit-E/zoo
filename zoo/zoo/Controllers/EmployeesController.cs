@@ -13,30 +13,33 @@ namespace zoo.Controllers
         EmployeesServicies employeesServicies = new EmployeesServicies();
         // GET: api/<employeesController>
         [HttpGet]
-        public List<Employee> Get()
+        public ActionResult<List<Employee>> Get()
         {
             return employeesServicies.Get();
         }
 
         // GET api/<employeesController>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public ActionResult<Employee> Get(int id)
         {
-            return employeesServicies.GetById(id);
+            Employee employee = employeesServicies.GetById(id);
+            if (employee == null)
+                return NotFound();
+            return employee;
         }
 
         // POST api/<employeesController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Employee employee)
         {
-            return employeesServicies.Post(employee);
+            return employeesServicies.Add(employee);
         }
 
         // PUT api/<employeesController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Employee employee)
         {
-            return employeesServicies.Put(id, employee);
+            return employeesServicies.Update(id, employee);
         }
 
         // DELETE api/<employeesController>/5

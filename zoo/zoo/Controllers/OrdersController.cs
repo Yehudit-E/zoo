@@ -13,30 +13,33 @@ namespace zoo.Controllers
         OrdersServicies ordersServicies = new OrdersServicies();
         // GET: api/<OrdersController>
         [HttpGet]
-        public List<Order> Get()
+        public ActionResult<List<Order>> Get()
         {
             return ordersServicies.Get();
         }
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
-        public Order Get(int id)
+        public ActionResult<Order> Get(int id)
         {
-            return ordersServicies.GetById(id);
+            Order order = ordersServicies.GetById(id);
+            if (order == null)
+                return NotFound();
+            return order;
         }
 
         // POST api/<OrdersController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Order order)
         {
-            return ordersServicies.Post(order);
+            return ordersServicies.Add(order);
         }
 
         // PUT api/<OrdersController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Order order)
         {
-            return ordersServicies.Put(id, order);
+            return ordersServicies.Update(id, order);
         }
 
         // DELETE api/<OrdersController>/5

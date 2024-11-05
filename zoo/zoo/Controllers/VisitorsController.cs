@@ -13,32 +13,34 @@ namespace zoo.Controllers
         VisitorsServicies visitorsServicies = new VisitorsServicies();
         // GET: api/<VisitorsController>
         [HttpGet]
-        public List<Visitor> Get()
+        public ActionResult<List<Visitor>> Get()
         {
             return visitorsServicies.Get();
         }
 
         // GET api/<VisitorsController>/5
         [HttpGet("{id}")]
-        public Visitor Get(int id)
+        public ActionResult<Visitor> Get(int id)
         {
-            return visitorsServicies.GetById(id);
+            Visitor visitor = visitorsServicies.GetById(id);
+            if (visitor == null)
+                return NotFound();
+            return visitor;
         }
 
         // POST api/<VisitorsController>
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Visitor visitor)
         {
-            return visitorsServicies.Post(visitor);
+            return visitorsServicies.Add(visitor);
         }
 
         // PUT api/<VisitorsController>/5
         [HttpPut("{id}")]
         public ActionResult<bool> Put(int id, [FromBody] Visitor visitor)
         {
-            return visitorsServicies.Put(id, visitor);
+            return visitorsServicies.Update(id, visitor);
         }
-
         // DELETE api/<VisitorsController>/5
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(int id)
