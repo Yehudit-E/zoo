@@ -13,7 +13,7 @@ namespace zoo.Controllers
         TicketsServicies ticketsServicies = new TicketsServicies();
         // GET: api/<TicketsController>
         [HttpGet]
-        public ActionResult<List<Ticket>> Get()
+        public ActionResult<IEnumerable<Ticket>> Get()
         {
             return ticketsServicies.Get();
         }

@@ -13,7 +13,7 @@ namespace zoo.Controllers
         EmployeesServicies employeesServicies = new EmployeesServicies();
         // GET: api/<employeesController>
         [HttpGet]
-        public ActionResult<List<Employee>> Get()
+        public ActionResult<IEnumerable<Employee>> Get()
         {
             return employeesServicies.Get();
         }

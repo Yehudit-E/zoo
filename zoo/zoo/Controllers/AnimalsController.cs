@@ -13,7 +13,7 @@ namespace zoo.Controllers
         AnimalsServicies animalsServicies=new AnimalsServicies();
         // GET: api/<AnimalsController>
         [HttpGet]
-        public ActionResult< List<Animal>> Get()
+        public ActionResult<IEnumerable<Animal>> Get()
         {
             return animalsServicies.Get();
         }

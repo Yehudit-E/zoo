@@ -13,7 +13,7 @@ namespace zoo.Controllers
         ShowsServicies showsServicies = new ShowsServicies();
         // GET: api/<ShowsController>
         [HttpGet]
-        public ActionResult<List<Show>> Get()
+        public ActionResult<IEnumerable<Show>> Get()
         {
             return showsServicies.Get();
         }

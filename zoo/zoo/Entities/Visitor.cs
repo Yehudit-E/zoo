@@ -1,8 +1,11 @@
-﻿namespace zoo.Entities
+﻿using Microsoft.Extensions.Primitives;
+
+namespace zoo.Entities
 {
     public class Visitor
     {
         public int Id { get; private set; }
+        public string TZ { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
@@ -19,6 +22,7 @@
         public Visitor(Visitor v)
         {
             Id = count++;
+            TZ = v.TZ;
             Name = v.Name;
             Email = v.Email;
             Phone = v.Phone;
@@ -29,6 +33,7 @@
         public Visitor(int id, Visitor v)
         {
             Id = id;
+            TZ = v.TZ;
             Name = v.Name;
             Email = v.Email;
             Phone = v.Phone;

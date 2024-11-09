@@ -13,7 +13,7 @@ namespace zoo.Controllers
         VisitorsServicies visitorsServicies = new VisitorsServicies();
         // GET: api/<VisitorsController>
         [HttpGet]
-        public ActionResult<List<Visitor>> Get()
+        public ActionResult<IEnumerable<Visitor>> Get()
         {
             return visitorsServicies.Get();
         }

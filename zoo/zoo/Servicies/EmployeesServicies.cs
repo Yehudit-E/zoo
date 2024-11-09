@@ -17,15 +17,37 @@ namespace zoo.Servicies
         {
             return dataEmployees.FirstOrDefault(x => x.Id == id);
         }
+        public bool IsCorrectTZ(string TZ)
+        {
+            if (TZ.Length != 9)
+                return false;
+            int sum = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                if (TZ[i] < '0' || TZ[i] > '9')
+                    return false;
+                if (i % 2 == 0)
+                    sum += TZ[i] - '0';
+                else
+                    sum += (TZ[i] - '0') * 2 % 10 + (TZ[i] - '0') * 2 / 10 % 10;
+            }
+            if (10 - (sum % 10) == TZ[8] - '0')
+                return true;
+            return false;
+        }
         public bool Add(Employee e)
         {
-            dataEmployees.Add(new Employee(e));////
-            return true;
+            if(IsCorrectTZ(e.TZ))
+            { 
+                dataEmployees.Add(new Employee(e));////
+                return true;
+            }
+            return false;
         }
         public bool Update(int id, Employee e)
         {
             int index = dataEmployees.FindIndex(x => x.Id == id);
-            if (index != -1)
+            if (index != -1&& IsCorrectTZ(e.TZ))
             {
                 dataEmployees[index] = new Employee(id, e);
                 return true;

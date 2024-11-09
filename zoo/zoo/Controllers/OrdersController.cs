@@ -13,7 +13,7 @@ namespace zoo.Controllers
         OrdersServicies ordersServicies = new OrdersServicies();
         // GET: api/<OrdersController>
         [HttpGet]
-        public ActionResult<List<Order>> Get()
+        public ActionResult<IEnumerable<Order>> Get()
         {
             return ordersServicies.Get();
         }

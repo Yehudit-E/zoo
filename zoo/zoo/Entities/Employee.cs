@@ -3,6 +3,7 @@
     public class Employee
     {
         public int Id { get; private set; }
+        public string TZ { get;  set; }
         public string Name { get; set; }
         public string Role { get; set; }//enum
         public string Phone { get; set; }
@@ -22,6 +23,7 @@
         public Employee(Employee e)
         {
             Id = count++;
+            TZ= e.TZ;
             Name = e.Name;
             Role = e.Role;
             Email = e.Email;
@@ -37,6 +39,7 @@
         public Employee(int id, Employee e)
         {
             Id = id;
+            TZ = e.TZ;
             Name = e.Name;
             Role = e.Role;
             Email = e.Email;
