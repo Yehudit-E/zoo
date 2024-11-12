@@ -10,7 +10,11 @@ namespace zoo.Controllers
     [ApiController]
     public class AnimalsController : ControllerBase
     {
-        AnimalsServicies animalsServicies=new AnimalsServicies();
+        private readonly AnimalsServicies animalsServicies;
+        public AnimalsController(AnimalsServicies a)
+        {
+            animalsServicies = a;
+        }
         // GET: api/<AnimalsController>
         [HttpGet]
         public ActionResult<IEnumerable<Animal>> Get()

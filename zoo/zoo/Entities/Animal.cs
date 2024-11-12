@@ -11,7 +11,7 @@
         public double Height { get; set; }
         public DateTime FeedingTime { get; set; }
 
-        private static int count = 1;
+        private static int count = 2;
 
         public Animal() {}
 
