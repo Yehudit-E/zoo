@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Zoo.Core.Entities
 {
     public class Visitor
     {
+        [Key]
         public int Id { get; private set; }
         public string TZ { get; set; }
         public string Name { get; set; }
@@ -18,15 +20,15 @@ namespace Zoo.Core.Entities
         public int Rating { get; set; }
 
 
-        private static int count = 1;
+    
 
         public Visitor() { }
 
 
         public Visitor(Visitor v)
         {
-            Id = count++;
-            TZ = v.TZ;
+            Id = v.Id;
+            Id = v.Id;
             Name = v.Name;
             Email = v.Email;
             Phone = v.Phone;
@@ -34,17 +36,7 @@ namespace Zoo.Core.Entities
             LastVisitDate = v.LastVisitDate;
             Rating = v.Rating;
         }
-        public Visitor(int id, Visitor v)
-        {
-            Id = id;
-            TZ = v.TZ;
-            Name = v.Name;
-            Email = v.Email;
-            Phone = v.Phone;
-            City = v.City;
-            LastVisitDate = v.LastVisitDate;
-            Rating = v.Rating;
-        }
+    
     }
 
 }

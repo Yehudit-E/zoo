@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 
 namespace Zoo.Service.Services
 {
-    public class EmployeesService:IService<Employee>
+    public class EmployeesService:IEmployeesService
     {
         readonly IRepository<Employee> _iRepository;
         public EmployeesService(IRepository<Employee> iRepository)
@@ -19,7 +20,7 @@ namespace Zoo.Service.Services
         {
             return _iRepository.Get();
         }
-        public Employee GetById(int id)
+        public Employee? GetById(int id)
         {
             return _iRepository.GetById(id);
         }
@@ -45,17 +46,17 @@ namespace Zoo.Service.Services
                 return true;
             return false;
         }  
-        public bool Add(Employee item)
+        public Employee Add(Employee item)
         {
             if (IsValidTz(item.TZ))
                 return _iRepository.Add(item);
-            return false;
+            return null;
         }
-        public bool Update(int id, Employee item)
+        public Employee Update(int id, Employee item)
         {
             if (IsValidTz(item.TZ))
                 return _iRepository.Update(id, item);
-            return false;
+            return null;
         }
         public bool DeleteById(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,8 @@ namespace Zoo.Core.Entities
 {
     public class Order
     {
-        public int Id { get; private set; }
+        [Key]
+        public int Id { get; set; }
         public int CardId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime DateOfVisit { get; set; }
@@ -18,34 +20,23 @@ namespace Zoo.Core.Entities
         public int Status { get; set; }//מומש, בתוקף
 
 
-        private static int count = 2;
 
         public Order() { }
 
 
         public Order(Order o)
         {
-            Id = count++;
+            Id = o.Id;
             CardId = o.CardId;
             OrderDate = o.OrderDate;
             DateOfVisit = o.DateOfVisit;
-            VisitorId = count;
+            VisitorId = o.VisitorId;
             Amount = o.Amount;
             TotalPay = o.TotalPay;
             Status = o.Status;
                 
         }
-        public Order(int id, Order o)
-        {
-            Id = id;
-            CardId = o.CardId;
-            OrderDate = o.OrderDate;
-            DateOfVisit = o.DateOfVisit;
-            VisitorId = count;
-            Amount = o.Amount;
-            TotalPay = o.TotalPay;
-            Status = o.Status;
-        }
+       
     }
 
 }

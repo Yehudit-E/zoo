@@ -1,11 +1,11 @@
-
+using Microsoft.EntityFrameworkCore;
 using Zoo.API.Controllers;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 using Zoo.Data;
 using Zoo.Data.Repository;
 using Zoo.Service.Services;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,20 +16,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<DataContext>(
+    options =>{ 
+        options.UseSqlServer("Data Source = DESKTOP-8ED3CL9; Initial Catalog = db_zoo; Integrated Security = true; "); 
+    }
+);
 
-builder.Services.AddSingleton<DataContext>();
-builder.Services.AddScoped<IService<Animal>, AnimalsService>();
-builder.Services.AddScoped<IRepository<Animal>, AnimalsRepository>();
-builder.Services.AddScoped<IService<Employee>, EmployeesService>();
-builder.Services.AddScoped<IRepository<Employee>, EmployeesRepository>();
-builder.Services.AddScoped<IService<Order>, OrdersService>();
-builder.Services.AddScoped<IRepository<Order>, OrdersRepository>();
-builder.Services.AddScoped<IService<Show>, ShowsService>();
-builder.Services.AddScoped<IRepository<Show>, ShowsRepository>();
-builder.Services.AddScoped<IService<Ticket>, TicketsService>();
-builder.Services.AddScoped<IRepository<Ticket>, TicketsRepository>();
-builder.Services.AddScoped<IService<Visitor>, VisitorsService>();
-builder.Services.AddScoped<IRepository<Visitor>, VisitorsRepository>();
+builder.Services.AddScoped<IAnimalsService, AnimalsService>();
+builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
+builder.Services.AddScoped<IShowsService, ShowsService>();
+builder.Services.AddScoped<ITicketsService, TicketsService>();
+builder.Services.AddScoped<IVisitorsService, VisitorsService>();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+
 
 
 

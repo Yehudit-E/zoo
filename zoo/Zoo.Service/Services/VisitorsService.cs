@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 
 namespace Zoo.Service.Services
 {
-    public class VisitorsService:IService<Visitor>
+    public class VisitorsService:IVisitorsService
     {
         readonly IRepository<Visitor> _iRepository;
         public VisitorsService(IRepository<Visitor> iRepository)
@@ -19,7 +20,7 @@ namespace Zoo.Service.Services
         {
             return _iRepository.Get();
         }
-        public Visitor GetById(int id)
+        public Visitor? GetById(int id)
         {
             return _iRepository.GetById(id);
         }
@@ -45,17 +46,17 @@ namespace Zoo.Service.Services
                 return true;
             return false;
         }
-        public bool Add(Visitor item)
+        public Visitor Add(Visitor item)
         {
             if (IsValidTz(item.TZ))
                 return _iRepository.Add(item);
-            return false;
+            return null;
         }
-        public bool Update(int id, Visitor item)
+        public Visitor Update(int id, Visitor item)
         {
             if (IsValidTz(item.TZ))
                 return _iRepository.Update(id, item);
-            return false;
+            return null;
         }
         public bool DeleteById(int id)
         {

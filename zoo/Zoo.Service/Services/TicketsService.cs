@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 
 namespace Zoo.Service.Services
 {
-    public class TicketsService:IService<Ticket>
+    public class TicketsService:ITicketsService
     {
         readonly IRepository<Ticket> _iRepository;
         public TicketsService(IRepository<Ticket> iRepository)
@@ -19,16 +20,16 @@ namespace Zoo.Service.Services
         {
             return _iRepository.Get();
         }
-        public Ticket GetById(int id)
+        public Ticket? GetById(int id)
         {
             return _iRepository.GetById(id);
         }
 
-        public bool Add(Ticket item)
+        public Ticket Add(Ticket item)
         {
             return _iRepository.Add(item);
         }
-        public bool Update(int id, Ticket item)
+        public Ticket Update(int id, Ticket item)
         {
             return _iRepository.Update(id, item);
         }

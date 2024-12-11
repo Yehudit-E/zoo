@@ -9,10 +9,9 @@ namespace Zoo.Core.Interfaces
     public interface IRepository<T>
     {
         public List<T> Get();
-        public T GetById(int id);
-        public bool Add(T item);
-        public bool Update(int id, T item);
+        public T? GetById(int id);
+        public T Add(T item);
+        public T Update(int id, T item);
         public bool DeleteById(int id);
-
     }
 }

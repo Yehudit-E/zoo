@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ namespace Zoo.Core.Entities
 {
     public class Employee
     {
+        [Key]
         public int Id { get; private set; }
-        public string TZ { get;  set; }
+        public string TZ { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }//enum
         public string Phone { get; set; }
@@ -19,17 +21,14 @@ namespace Zoo.Core.Entities
         public DateTime DateOfStartWork { get; set; }
         public double Salary { get; set; }
         public double HoursOfWork { get; set; }
-        
-
-        private static int count = 2;
 
         public Employee() { }
 
 
         public Employee(Employee e)
         {
-            Id = count++;
-            TZ= e.TZ;
+            Id = e.Id; 
+            TZ = e.TZ;
             Name = e.Name;
             Role = e.Role;
             Email = e.Email;
@@ -42,20 +41,7 @@ namespace Zoo.Core.Entities
 
 
         }
-        public Employee(int id, Employee e)
-        {
-            Id = id;
-            TZ = e.TZ;
-            Name = e.Name;
-            Role = e.Role;
-            Email = e.Email;
-            Phone = e.Phone;
-            City = e.City;
-            Age = e.Age;
-            DateOfStartWork = e.DateOfStartWork;
-            Salary = e.Salary;
-            HoursOfWork = e.HoursOfWork;
-        }
+        
     }
 
 }

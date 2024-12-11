@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 
 namespace Zoo.Service.Services
 {
-    public class OrdersService: IService<Order>
+    public class OrdersService: IOrdersService
     {
         readonly IRepository<Order> _iRepository;
         public OrdersService(IRepository<Order> iRepository)
@@ -19,16 +20,16 @@ namespace Zoo.Service.Services
         {
             return _iRepository.Get();
         }
-        public Order GetById(int id)
+        public Order? GetById(int id)
         {
             return _iRepository.GetById(id);
         }
 
-        public bool Add(Order item)
+        public Order Add(Order item)
         {
             return _iRepository.Add(item);
         }
-        public bool Update(int id, Order item)
+        public Order Update(int id, Order item)
         {
             return _iRepository.Update(id, item);
         }

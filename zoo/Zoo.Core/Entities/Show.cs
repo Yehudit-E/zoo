@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Zoo.Core.Entities
 {
     public class Show
     {
+        [Key]
         public int Id { get; private set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -21,29 +23,13 @@ namespace Zoo.Core.Entities
         public int MaxNumOfViewers { get; set; }
 
 
-        private static int count = 2;
 
         public Show() { }
 
 
         public Show(Show s)
         {
-            Id = count++;
-            Name = s.Name;
-            Description = s.Description;
-            Date = s.Date;
-            Time = s.Time;
-            Location = s.Location;
-            Price = s.Price;
-            Duration = s.Duration;
-            RecommendedAge = s.RecommendedAge;
-            GuidId = s.GuidId;
-            MaxNumOfViewers = s.MaxNumOfViewers;
-
-        }
-        public Show(int id, Show s)
-        {
-            Id = id;
+            Id = s.Id;            
             Name = s.Name;
             Description = s.Description;
             Date = s.Date;
@@ -55,5 +41,6 @@ namespace Zoo.Core.Entities
             GuidId = s.GuidId;
             MaxNumOfViewers = s.MaxNumOfViewers;
         }
+        
     }
 }

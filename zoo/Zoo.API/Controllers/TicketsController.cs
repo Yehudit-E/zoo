@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Interfaces.IServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,22 +11,23 @@ namespace Zoo.API.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
-        readonly IService<Ticket> _iService;
-        public TicketsController(IService<Ticket> iService)
+        readonly ITicketsService _iTicketsService
+            ;
+        public TicketsController(ITicketsService iService)
         {
-            _iService = iService;
+            _iTicketsService = iService;
         }
         // GET: api/<TicketsController>
         [HttpGet]
         public ActionResult<IEnumerable<Ticket>> Get()
         {
-            return _iService.Get();
+            return _iTicketsService.Get();
         }
         // GET api/<TicketsController>/5
         [HttpGet("{id}")]
         public ActionResult<Ticket> Get(int id)
         {
-            Ticket t = _iService.GetById(id);
+            Ticket t = _iTicketsService.GetById(id);
             if (t == null)
                 return NotFound();
             return t;
@@ -33,23 +35,23 @@ namespace Zoo.API.Controllers
 
         // POST api/<TicketsController>
         [HttpPost]
-        public ActionResult<bool> Post([FromBody] Ticket t)
+        public ActionResult<Ticket> Post([FromBody] Ticket t)
         {
-            return _iService.Add(t);
+            return _iTicketsService.Add(t);
         }
 
         // PUT api/<TicketsController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(int id, [FromBody] Ticket t)
+        public ActionResult<Ticket> Put(int id, [FromBody] Ticket t)
         {
-            return _iService.Update(id, t);
+            return _iTicketsService.Update(id, t);
         }
 
         // DELETE api/<TicketsController>/5
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(int id)
         {
-            return _iService.DeleteById(id);
+            return _iTicketsService.DeleteById(id);
         }
     }
 }
